@@ -1,16 +1,19 @@
+import 'package:coffee_shop/common/card.dart';
 import 'package:flutter/material.dart';
+import 'package:coffee_shop/common/bottom_nav_bar.dart'; // Import BottomNavBar
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 4, // Number of tabs
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: SafeArea(
-          child: Column(
+    return SafeArea(
+      child: DefaultTabController(
+        length: 4, // Number of tabs
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          bottomNavigationBar: const CusBottomNavBar(),
+          body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
@@ -22,7 +25,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   Padding(
                     padding: EdgeInsets.only(
-                      right: MediaQuery.of(context).size.width * 0.03,
+                      right: MediaQuery.of(context).size.width * 0.02,
                       top: 0,
                       bottom: 10,
                     ),
@@ -58,7 +61,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                 decoration: BoxDecoration(
                   color: Color(0xFFEEE5DA),
                   borderRadius: BorderRadius.circular(10),
@@ -88,90 +91,64 @@ class HomeScreen extends StatelessWidget {
                   indicatorColor: Color(0XFF8D510A),
                   unselectedLabelStyle: TextStyle(color: Color(0XFFC09E77)),
                   tabs: [
-                    Container(
-                      height: 30,
-                      width: 120,
-                      decoration: BoxDecoration(
-                        color: Color(0XFF8D510A),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: const Center(
-                        child: Text(
-                          "Cappuccino",
-                          style: TextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.bold, // Optional
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: 30,
-                      width: 120,
-                      decoration: BoxDecoration(
-                        color: Color(0XFFEEE5DA),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: const Center(
-                        child: Text(
-                          "Latte",
-                          style: TextStyle(
-                            fontSize: 11,
-
-                            fontWeight: FontWeight.bold, // Optional
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: 30,
-                      width: 120,
-                      decoration: BoxDecoration(
-                        color: Color(0XFFEEE5DA),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: const Center(
-                        child: Text(
-                          "Americano",
-                          style: TextStyle(
-                            fontSize: 11,
-
-                            fontWeight: FontWeight.bold, // Optional
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: 30,
-                      width: 120,
-                      decoration: BoxDecoration(
-                        color: Color(0XFFEEE5DA),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: const Center(
-                        child: Text(
-                          "Expresso",
-                          style: TextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.bold, // Optional
-                          ),
-                        ),
-                      ),
-                    ),
+                    _buildTabItem("Cappuccin", true),
+                    _buildTabItem("Latte", false),
+                    _buildTabItem("Americano", false),
+                    _buildTabItem("Espresso", false),
                   ],
                 ),
               ),
-              const Expanded(
+              // SizedBox(height: MediaQuery.of(context).size.height * 0.043),
+              Expanded(
                 child: TabBarView(
                   children: [
-                    Center(child: Text("All Coffees")),
-                    Center(child: Text("Hot Coffees")),
-                    Center(child: Text("Cold Coffees")),
-                    Center(child: Text("Cold Coffees")),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: 8.0, bottom: 8, right: 8),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          CustomCard(),
+                          Image.asset('Assets/images/offer.png'),
+                          const Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 10),
+                              child: Text(
+                                'Popular Shops',
+                                style: TextStyle(
+                                    fontSize: 22, fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                          ),
+                          Image.asset('Assets/images/shop 1.png'),
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTabItem(String text, bool isSelected) {
+    return Container(
+      height: 30,
+      width: 120,
+      decoration: BoxDecoration(
+        color: isSelected ? const Color(0XFF8D510A) : const Color(0XFFEEE5DA),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Center(
+        child: Text(
+          text,
+          style: const TextStyle(
+            fontSize: 11,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),
