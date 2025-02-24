@@ -62,6 +62,7 @@ class LoginScreen extends StatelessWidget {
                 CustomButton(
                     title: 'Login',
                     opacity: 0.8,
+                    textColor: Colors.black,
                     onPressed: () {
                       Get.to(() => HomeScreen());
                     }),

@@ -47,6 +47,8 @@ class SignUpScreen extends StatelessWidget {
                 ),
                 CustomButton(
                   title: 'Sign Up',
+                  textColor: Colors.black,
+                  color: Colors.white,
                   opacity: 0.75,
                   onPressed: () {
                     Get.to(() => LoginScreen());

@@ -14,28 +14,30 @@ class CustomSelectButton extends StatelessWidget {
         isSelected.value =
             !isSelected.value; // Toggle selection for this button only
       },
-      child: Obx(() => Container(
-            margin: EdgeInsets.all(10),
-            height: 32,
-            width: 71,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(5),
-              border: Border.all(
+      child: Obx(
+        () => Container(
+          margin: EdgeInsets.all(10),
+          height: 32,
+          width: 71,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(5),
+            border: Border.all(
+              color: isSelected.value ? Color(0XFF8D510A) : Colors.grey,
+              width: 2,
+            ),
+          ),
+          child: Center(
+            child: Text(
+              text,
+              style: TextStyle(
                 color: isSelected.value ? Color(0XFF8D510A) : Colors.grey,
-                width: 1,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            child: Center(
-              child: Text(
-                text,
-                style: TextStyle(
-                  color: isSelected.value ? Color(0XFF8D510A) : Colors.grey,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          )),
+          ),
+        ),
+      ),
     );
   }
 }

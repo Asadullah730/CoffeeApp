@@ -61,16 +61,17 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 decoration: BoxDecoration(
-                  color: Color(0xFFEEE5DA),
+                  color: const Color(0xFFEEE5DA),
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.1),
                       blurRadius: 10,
                       spreadRadius: 2,
-                      offset: Offset(0, 4),
+                      offset: const Offset(0, 4),
                     ),
                   ],
                 ),
@@ -85,7 +86,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 4.0),
+                padding: const EdgeInsets.only(left: 0.0),
                 child: TabBar(
                   labelColor: Colors.white,
                   indicatorColor: Color(0XFF8D510A),
@@ -98,22 +99,34 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              // SizedBox(height: MediaQuery.of(context).size.height * 0.043),
               Expanded(
                 child: TabBarView(
                   children: [
                     Padding(
-                      padding:
-                          const EdgeInsets.only(left: 8.0, bottom: 8, right: 8),
+                      padding: const EdgeInsets.only(
+                          left: 8.0, bottom: 0, top: 10, right: 8),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           CustomCard(),
-                          Image.asset('Assets/images/offer.png'),
+                          Container(
+                            height: 100,
+                            width: 320,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(40),
+                            ),
+                            child: Image.asset(
+                              'Assets/images/offer.png',
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
                           const Align(
                             alignment: Alignment.centerLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(left: 10),
+                              padding: EdgeInsets.only(left: 18),
                               child: Text(
                                 'Popular Shops',
                                 style: TextStyle(
@@ -121,7 +134,17 @@ class HomeScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Image.asset('Assets/images/shop 1.png'),
+                          Container(
+                            height: 100,
+                            width: 300,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(40),
+                            ),
+                            child: Image.asset(
+                              'Assets/images/shop 1.png',
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ],
                       ),
                     )

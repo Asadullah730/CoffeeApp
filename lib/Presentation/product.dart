@@ -1,3 +1,4 @@
+import 'package:coffee_shop/common/custom_button.dart';
 import 'package:coffee_shop/common/custom_select_button.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -107,7 +108,7 @@ class ProductScreen extends StatelessWidget {
                 height: 5,
               ),
               const Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: Text(
@@ -133,6 +134,35 @@ class ProductScreen extends StatelessWidget {
                   ],
                 ),
               ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    'Description',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  color: Color(0XFFEEE5DB),
+                  child: Center(
+                    child: CustomButton(
+                      onPressed: () {},
+                      title: 'Place Order',
+                      width: 200,
+                      height: 50,
+                      color: Color(0XFF8D510A),
+                      textColor: Colors.white,
+                      // opacity: 0.10,
+                    ),
+                  ),
+                ),
+              )
             ],
           ),
 
