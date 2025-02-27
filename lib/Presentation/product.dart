@@ -1,10 +1,14 @@
+import 'package:coffee_shop/Presentation/review_order_screen.dart';
 import 'package:coffee_shop/common/custom_button.dart';
 import 'package:coffee_shop/common/custom_select_button.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ProductScreen extends StatelessWidget {
   final Map<String, dynamic> product;
+  var selectedSize = 'S'.obs; // Single variable to track size selection
+
   ProductScreen({super.key, required this.product});
 
   @override
@@ -12,7 +16,6 @@ class ProductScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          // Image covering the background
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -65,7 +68,7 @@ class ProductScreen extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          product['price'].toString(),
+                          'Rs-${product['price'].toString()}',
                           style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -76,37 +79,9 @@ class ProductScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: Container(
-                    height: 30,
-                    width: 30,
-                    decoration: BoxDecoration(
-                        color: Color(0XFF8D510A),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Center(
-                      child: IconButton(
-                        onPressed: () {
-                          if (kDebugMode) {
-                            print("ADD Button Clicked");
-                          }
-                        },
-                        icon: const Icon(
-                          Icons.add,
-                          color: Colors.white,
-                          size: 15,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 5,
-              ),
+              const SizedBox(height: 10),
+
+              /// **Size Selection**
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.0),
                 child: Align(
@@ -119,23 +94,54 @@ class ProductScreen extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    CustomSelectButton(
-                      text: 'S',
-                    ),
-                    CustomSelectButton(
-                      text: 'M',
-                    ),
-                    CustomSelectButton(
-                      text: 'L',
-                    ),
-                  ],
+                child: Obx(
+                  () => Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      /// Small Size Button
+                      GestureDetector(
+                        onTap: () {
+                          selectedSize.value = 'S';
+                        },
+                        child: CustomSelectButton(
+                          text: 'S',
+                          isSelected: selectedSize.value == 'S',
+                        ),
+                      ),
+
+                      /// Medium Size Button
+                      GestureDetector(
+                        onTap: () {
+                          selectedSize.value = 'M';
+                          if (kDebugMode) {
+                            print(
+                                "SLECTED SIZE OF COFFEE ${selectedSize.value}");
+                          }
+                        },
+                        child: CustomSelectButton(
+                          text: 'M',
+                          isSelected: selectedSize.value == 'M',
+                        ),
+                      ),
+
+                      /// Large Size Button
+                      GestureDetector(
+                        onTap: () {
+                          selectedSize.value = 'L';
+                        },
+                        child: CustomSelectButton(
+                          text: 'L',
+                          isSelected: selectedSize.value == 'L',
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
+
+              /// **Place Order Button**
               const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15),
+                padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 35),
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: Text(
@@ -148,17 +154,26 @@ class ProductScreen extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: Container(
-                  color: Color(0XFFEEE5DB),
-                  child: Center(
-                    child: CustomButton(
-                      onPressed: () {},
-                      title: 'Place Order',
-                      width: 200,
-                      height: 50,
-                      color: Color(0XFF8D510A),
-                      textColor: Colors.white,
-                      // opacity: 0.10,
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    height: 83,
+                    color: Color(0XFFEEE5DB),
+                    child: Center(
+                      child: CustomButton(
+                        onPressed: () {
+                          Get.to(() => ReviewOrderScreen(
+                                product: product,
+                                size: selectedSize.value,
+                              ));
+                        },
+                        title: 'Place Order',
+                        width: 200,
+                        height: 50,
+                        color: Color(0XFF8D510A),
+                        textColor: Colors.white,
+                        // opacity: 0.10,
+                      ),
                     ),
                   ),
                 ),
@@ -166,7 +181,7 @@ class ProductScreen extends StatelessWidget {
             ],
           ),
 
-          // AppBar with transparent background
+          /// **Transparent AppBar**
           Positioned(
             top: MediaQuery.of(context).padding.top,
             left: 0,
@@ -175,7 +190,8 @@ class ProductScreen extends StatelessWidget {
               backgroundColor: Colors.transparent,
               elevation: 0,
               automaticallyImplyLeading: true,
-              iconTheme: IconThemeData(color: Color(0XFFF6CB9B), size: 35),
+              iconTheme:
+                  const IconThemeData(color: Color(0XFFF6CB9B), size: 35),
             ),
           ),
         ],

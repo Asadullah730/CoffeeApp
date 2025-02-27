@@ -1,9 +1,11 @@
 import 'package:coffee_shop/common/card.dart';
 import 'package:flutter/material.dart';
-import 'package:coffee_shop/common/bottom_nav_bar.dart'; // Import BottomNavBar
+import 'package:coffee_shop/common/bottom_nav_bar.dart';
+import 'package:get/get.dart'; // Import BottomNavBar
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
+  final RxBool selectedcoffee = false.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -101,6 +103,7 @@ class HomeScreen extends StatelessWidget {
               ),
               Expanded(
                 child: TabBarView(
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(
@@ -109,19 +112,9 @@ class HomeScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           CustomCard(),
-                          Container(
-                            height: 100,
-                            width: 320,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(40),
-                            ),
-                            child: Image.asset(
-                              'Assets/images/offer.png',
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 30,
+                          Image.asset(
+                            'Assets/images/offer.png',
+                            fit: BoxFit.cover,
                           ),
                           const Align(
                             alignment: Alignment.centerLeft,
@@ -136,7 +129,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                           Container(
                             height: 100,
-                            width: 300,
+                            width: 320,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(40),
                             ),

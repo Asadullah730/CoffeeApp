@@ -12,14 +12,14 @@ class CustomCard extends StatelessWidget {
       'title': 'Cupposino',
       'subtitle': 'without milk',
       'rating': '4.5',
-      'price': '\$3.80',
+      'price': 70,
     },
     {
       'imgPath': 'Assets/images/Rectangle 3 (1).png',
       'title': 'Cupposino',
       'subtitle': 'with milk',
       'rating': '4.5',
-      'price': '\$3.00',
+      'price': 75,
     }
   ];
 
@@ -52,7 +52,7 @@ class CustomCard extends StatelessWidget {
                 child: Column(
                   children: [
                     Image.asset(
-                      card[index]['imgPath']!,
+                      card[index]['imgPath'].toString(),
                       width: double.infinity,
                       fit: BoxFit.cover,
                     ),
@@ -100,7 +100,7 @@ class CustomCard extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                card[index]['price'].toString(),
+                                'Rs-${card[index]['price'].toString()}',
                                 style: const TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold,
