@@ -60,7 +60,7 @@ class StartingScreen extends StatelessWidget {
                     alignment: Alignment.center,
                     child: CustomButton(
                       onPressed: () {
-                        Get.to(() => const LoginScreen());
+                        Get.to(() => LoginScreen());
                       },
                       title: "Get Started",
                     ),
