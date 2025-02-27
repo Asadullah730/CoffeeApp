@@ -3,13 +3,20 @@ import 'package:flutter/material.dart';
 class CustomTextField extends StatelessWidget {
   final String? hint;
   final TextEditingController? controller;
+  final TextInputType? keyboardType;
   final double opacity;
+  final bool? obscureText;
+
+  final FormFieldValidator<String>? validator; // Added validator parameter
 
   const CustomTextField({
     super.key,
     this.hint,
+    this.obscureText,
     this.controller,
     this.opacity = 1.0,
+    this.validator,
+    this.keyboardType,
   });
 
   @override
@@ -20,7 +27,12 @@ class CustomTextField extends StatelessWidget {
       child: Opacity(
         opacity: opacity.clamp(0.0, 1.0),
         child: TextFormField(
+          keyboardType: keyboardType,
+          keyboardAppearance: Brightness.light,
           controller: controller,
+          validator: validator,
+          obscureText: obscureText ?? false,
+          // Apply validator
           decoration: InputDecoration(
             hintText: hint,
             hintStyle: const TextStyle(color: Colors.black, fontSize: 20),
